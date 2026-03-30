@@ -1,0 +1,68 @@
+/*
+Problem: Remove Duplicates from Sorted Array
+
+Platform: LeetCode
+
+Problem Statement:
+Given a sorted integer array nums, remove the duplicates in-place such that 
+each unique element appears only once. The relative order of the elements 
+should be kept the same.
+
+Return the number of unique elements.
+
+The first k elements of nums should contain the unique elements.
+
+Example:
+Input: nums = [1,1,2]
+Output: 2
+Modified array: [1,2,_]
+
+Input: nums = [0,0,1,1,1,2,2,3,3,4]
+Output: 5
+Modified array: [0,1,2,3,4,_ ,_ ,_ ,_ ,_]
+
+Approach:
+Since the array is already sorted, duplicates will be adjacent.
+
+We use two pointers:
+lo → position to place the next unique element  
+hi → pointer used to traverse the array
+
+Steps:
+1. Traverse the array using hi pointer.
+2. Skip duplicates by moving hi forward.
+3. When a new unique element is found:
+   - swap it with the element at lo
+   - move lo forward
+4. Continue until the end of the array.
+
+Finally, lo represents the count of unique elements.
+
+Time Complexity: O(n)
+We traverse the array only once.
+
+Space Complexity: O(1)
+The operation is done in-place without extra space.
+*/
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+
+        int lo = 0, hi = 0;
+
+        while(hi < nums.size()){
+
+            if(hi < nums.size()-1 && nums[hi] == nums[hi+1]){
+                hi++;
+            }
+            else{
+                swap(nums[lo], nums[hi]);
+                lo++;
+                hi++;
+            }
+        }
+
+        return lo;
+    }
+};

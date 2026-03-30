@@ -1,0 +1,33 @@
+/*
+Platform: LeetCode
+
+Approach:
+Use Kadane's Algorithm. Traverse the array while maintaining the
+current subarray sum. Add each element to the running sum and update
+the maximum sum seen so far. If the running sum becomes negative,
+reset it to 0 since a negative sum cannot contribute to a maximum
+subarray in the future.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+*/
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+
+        int sum = 0;
+        int maxi = INT_MIN;
+
+        for(int i : nums){
+
+            sum += i;
+            maxi = max(maxi, sum);
+
+            if(sum < 0)
+                sum = 0;
+        }
+
+        return maxi;
+    }
+};

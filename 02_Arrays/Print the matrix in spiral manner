@@ -1,0 +1,64 @@
+/*
+Problem: Spiral Matrix
+Platform: LeetCode
+
+Approach:
+Use four boundaries to traverse the matrix in spiral order.
+lo1 → left column
+hi1 → right column
+lo2 → top row
+hi2 → bottom row
+
+Traverse:
+1. Left → Right across the top row
+2. Top → Bottom along the right column
+3. Right → Left across the bottom row
+4. Bottom → Top along the left column
+
+After each traversal, update the corresponding boundary and continue
+until all elements are visited.
+
+Time Complexity: O(m * n)
+Space Complexity: O(1) (excluding output array)
+*/
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& mat) {
+
+        vector<int> ans;
+
+        int lo1 = 0, lo2 = 0;
+        int hi1 = mat[0].size() - 1;
+        int hi2 = mat.size() - 1;
+
+        while(lo1 <= hi1 && lo2 <= hi2){
+
+            for(int i = lo1; i <= hi1; i++)
+                ans.push_back(mat[lo2][i]);
+
+            lo2++;
+
+            for(int i = lo2; i <= hi2; i++)
+                ans.push_back(mat[i][hi1]);
+
+            hi1--;
+
+            if(lo2 <= hi2){
+                for(int i = hi1; i >= lo1; i--)
+                    ans.push_back(mat[hi2][i]);
+            }
+
+            hi2--;
+
+            if(lo1 <= hi1){
+                for(int i = hi2; i >= lo2; i--)
+                    ans.push_back(mat[i][lo1]);
+            }
+
+            lo1++;
+        }
+
+        return ans;
+    }
+};

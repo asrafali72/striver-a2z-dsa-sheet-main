@@ -1,0 +1,36 @@
+/*
+Problem: Next Permutation
+Platform: LeetCode
+
+Approach:
+Find the first index from the right where nums[i] < nums[i+1].
+This is the breakpoint. Then find the smallest element greater than
+nums[i] on the right side and swap them. Finally reverse the part of
+the array after index i to get the next lexicographically greater
+permutation.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+*/
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+
+        int i = nums.size() - 2;
+
+        while(0 <= i && nums[i] >= nums[i+1])
+            i--;
+
+        if(0 <= i){
+            int j = nums.size() - 1;
+
+            while(nums[i] > nums[j])
+                j--;
+
+            swap(nums[i], nums[j]);
+        }
+
+        reverse(nums.begin() + i + 1, nums.end());
+    }
+};

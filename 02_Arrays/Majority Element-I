@@ -1,0 +1,39 @@
+/*
+Problem: Majority Element
+Platform: LeetCode
+
+Approach:
+Use Moore’s Voting Algorithm. Traverse the array while maintaining
+a candidate element and a count. If the count becomes zero, update
+the candidate. If the current element matches the candidate,
+increment the count; otherwise decrement it. Since the majority
+element appears more than n/2 times, the final candidate will be
+the majority element.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+*/
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+
+        int ele = 0, count = 0;
+
+        for(int i : nums){
+
+            if(count == 0){
+                ele = i;
+                count = 1;
+            }
+            else if(ele == i){
+                count++;
+            }
+            else{
+                count--;
+            }
+        }
+
+        return ele;
+    }
+};

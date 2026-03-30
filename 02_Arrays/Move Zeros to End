@@ -1,0 +1,36 @@
+/*
+Problem: Move Zeroes
+Platform: LeetCode
+
+Approach:
+Traverse the array using a pointer `lo`. Whenever a zero is found,
+search for the next non-zero element using pointer `hi` and swap them.
+This keeps moving zeroes toward the end while keeping the order of
+non-zero elements.
+
+Time Complexity: O(n²) in worst case
+Space Complexity: O(1)
+*/
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int lo = 0;
+
+        while(lo < nums.size()){
+            if(nums[lo] == 0){
+                int hi = lo + 1;
+
+                while(hi < nums.size() && nums[hi] == 0)
+                    hi++;
+
+                if(hi == nums.size())
+                    break;
+
+                swap(nums[lo], nums[hi]);
+            }
+
+            lo++;
+        }
+    }
+};

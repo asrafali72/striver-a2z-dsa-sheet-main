@@ -1,0 +1,32 @@
+	/*
+Problem: Rotate Image (Rotate Matrix by 90 Degrees)
+Platform: LeetCode
+
+Approach:
+To rotate the matrix by 90 degrees clockwise, first transpose the matrix
+(swap mat[i][j] with mat[j][i]). After transposing, reverse each row of
+the matrix. This converts rows into columns and produces the rotated matrix.
+
+Time Complexity: O(n^2)
+Space Complexity: O(1)
+*/
+
+class Solution {
+public:
+    void rotate(vector<vector<int>>& mat) {
+
+        for(int i = mat.size() - 1; i >= 0; i--){
+            for(int j = mat[0].size() - 1; j >= 0; j--){
+
+                if(i == j)
+                    break;
+                else
+                    swap(mat[i][j], mat[j][i]);
+            }
+        }
+
+        for(int i = 0; i < mat.size(); i++){
+            reverse(mat[i].begin(), mat[i].end());
+        }
+    }
+};

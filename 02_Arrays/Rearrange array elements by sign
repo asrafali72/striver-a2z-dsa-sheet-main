@@ -1,0 +1,45 @@
+/*
+Problem: Rearrange Array Elements by Sign
+Platform: LeetCode
+
+Approach:
+Use two pointers to find positive and negative elements.
+Pointer i finds positive numbers and pointer j finds negative numbers.
+Whenever a positive and negative pair is found, add them alternately
+to the result array. Continue until the array traversal is complete.
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+*/
+
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+
+        vector<int> ans;
+        int i = 0, j = 0;
+        int n = nums.size();
+
+        while(i < n && j < n){
+
+            if(nums[i] < 0){
+                i++;
+                continue;
+            }
+
+            if(nums[j] >= 0){
+                j++;
+                continue;
+            }
+
+            if(nums[i] >= 0 && nums[j] < 0){
+                ans.push_back(nums[i]);
+                ans.push_back(nums[j]);
+                i++;
+                j++;
+            }
+        }
+
+        return ans;
+    }
+};

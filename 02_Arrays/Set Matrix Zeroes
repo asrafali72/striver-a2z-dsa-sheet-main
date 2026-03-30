@@ -1,0 +1,40 @@
+/*
+Problem: Set Matrix Zeroes
+Platform: LeetCode
+
+Approach:
+First traverse the matrix and store the positions of all cells that
+contain 0 in a vector. Then for every stored position (i, j), set the
+entire row i and column j to 0. This ensures that all rows and columns
+containing a zero element are updated accordingly.
+
+Time Complexity: O((m*n) * (m+n))
+Space Complexity: O(k) where k is the number of zero elements
+*/
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& mat) {
+
+        vector<pair<int,int>> v;
+
+        for(int i = 0; i < mat.size(); i++){
+            for(int j = 0; j < mat[0].size(); j++){
+                if(mat[i][j] == 0){
+                    v.push_back({i, j});
+                }
+            }
+        }
+
+        for(auto [i, j] : v){
+
+            for(int k = 0; k < mat.size(); k++){
+                mat[k][j] = 0;
+            }
+
+            for(int k = 0; k < mat[0].size(); k++){
+                mat[i][k] = 0;
+            }
+        }
+    }
+};
